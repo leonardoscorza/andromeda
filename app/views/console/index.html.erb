@@ -1,4 +1,50 @@
-
-<div class="">
-		<textarea class="form-control" rows="8" ></textarea>
+<div style="margin-top:40px;margin-right:">
+	<p class="span2"></p>	
+	<textarea class="span10" rows='26' id="shellPass"  readonly></textarea>
+	
 </div>
+
+<div style="margin-top:px;margin-right:">
+	<p class="span2"></p>	
+	<textarea class="span10" rows='1' id="shellCurrent"></textarea>
+</div>
+
+
+
+<script type="text/javascript"> 
+	// turn = 0 
+
+	//  setInterval(function(){
+	//  	if (turn == 0)
+	//  	{
+	//  		turn = 1
+	//  		temp3 = '$ '
+	//  	}
+	//  	else
+	//  	{
+	//  		turn = 0
+	//  		temp3 = '  '
+	//  	}
+
+	//  	temp = $('#shellCurrent').val()
+	//  	temp2 = temp.substr(2)
+	 
+	//  	console.log(temp)
+	//  	console.log(temp2)
+
+
+	//  	$('#shellCurrent').text(temp3.concat(temp2))
+	//  },1000);
+
+
+  $(document).keypress(function(e) {
+	  if(e.which == 13) {
+	  	temp = $('#shellCurrent').val()
+	 	// string = temp.substr(10)
+	 
+
+	   	input = $('#shellPass').append(temp)
+	   	$('#shellCurrent').val('')
+  	  }
+});
+</script>
