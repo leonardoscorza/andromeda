@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-html, body { background: #343434; }
+#html, body { background: #343434; }
 
-#shellPass { background: #FFFFFF; font-weight:bold;}
+#shellPass { background: #FFFFFF; font-weight:bold;opacity:0.75; padding-left:4%;padding-top:35px;width: 66.8%;}
+#shellCurrent { background: #FFFFFF; font-weight:bold;padding-left:4%;opacity:0.75;width: 67.1%; }
+
+body
+{
+	background-image:url('/assets/Galaxy_011.jpg');
+	background-color:#cccccc;
+}

@@ -19,3 +19,5 @@ class PrimitiveSense
 		@@requeue.lpush(who, what)
 	end
 end
+
+$try = PrimitiveSense.new

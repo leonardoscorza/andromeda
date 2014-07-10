@@ -1,50 +1,70 @@
 <div style="margin-top:40px;margin-right:">
 	<p class="span2"></p>	
-	<textarea class="span10" rows='26' id="shellPass"  readonly></textarea>
+	<textarea  rows='26' id="shellPass"  readonly></textarea>
 	
 </div>
 
 <div style="margin-top:px;margin-right:">
 	<p class="span2"></p>	
-	<textarea class="span10" rows='1' id="shellCurrent"></textarea>
+	<input  rows='1' cols='1' id="shellCurrent"></input>
 </div>
 
 
 
 <script type="text/javascript"> 
-	// turn = 0 
-
-	//  setInterval(function(){
-	//  	if (turn == 0)
-	//  	{
-	//  		turn = 1
-	//  		temp3 = '$ '
-	//  	}
-	//  	else
-	//  	{
-	//  		turn = 0
-	//  		temp3 = '  '
-	//  	}
-
-	//  	temp = $('#shellCurrent').val()
-	//  	temp2 = temp.substr(2)
-	 
-	//  	console.log(temp)
-	//  	console.log(temp2)
-
-
-	//  	$('#shellCurrent').text(temp3.concat(temp2))
-	//  },1000);
-
+	 $('#shellCurrent').val('THINK ');
 
   $(document).keypress(function(e) {
-	  if(e.which == 13) {
-	  	temp = $('#shellCurrent').val()
-	 	// string = temp.substr(10)
 	 
 
-	   	input = $('#shellPass').append(temp)
+	  if(e.which == 13) {
+	  	
+	 	//Get the current time
+	 	var d = new Date();
+	 	var time;
+  		time  =     + d.getHours(); // => 9
+		time += ':' + d.getMinutes(); // =>  30
+		if(d.getSeconds() > 9)
+			time += ':' + d.getSeconds()	
+		else
+			time += ':0' + d.getSeconds()
+
+		//Mount the console text
+		temp = time + ' ->   ' + $('#shellCurrent').val();
+		shellContent = $('#shellPass').val() + temp + '\n';
+	   	input = $('#shellPass').val(shellContent)
+
+	   	//Call the submition function
+	   	submitCommand($('#shellCurrent').val())
+
+	   	//Reset the input console
 	   	$('#shellCurrent').val('')
+	   	$('#shellCurrent').val('THINK ');
+
+	   	//Scroll the console
+	   	document.getElementById("shellPass").scrollTop =    document.getElementById("shellPass").scrollHeight
+		
+
   	  }
+
+  	   //Função de exclusão de elemento
+        function submitCommand(command)
+        {
+
+          //Apaga no banco
+          info = {"command": command };
+            $.ajax({
+                type: 'post',
+                url: "../thinkDo",
+                data: info
+
+                }).done(function(data) {
+                   
+                   console.log("submit command")
+                  
+                });
+
+            
+        }
 });
 </script>
