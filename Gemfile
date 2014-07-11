@@ -8,7 +8,7 @@ gem "twitter-bootstrap-rails"
 
 gem 'bootstrap-sass'
 
-gem 'nokogiri'
+#gem 'nokogiri'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
@@ -24,7 +24,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 
 #Gem para parsear html
-gem 'nokogiri'
+#gem 'nokogiri'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
