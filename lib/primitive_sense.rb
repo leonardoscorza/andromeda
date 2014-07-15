@@ -11,7 +11,7 @@ class PrimitiveSense
 
 	#Listen for shell name (!)
 	def listen
-		@@requeue.rpop('!')
+		@@requeue.rpop('console')
 	end
 
 	#expressed their wishes (what) to member (who)
@@ -20,4 +20,4 @@ class PrimitiveSense
 	end
 end
 
-$try = PrimitiveSense.new
+$sense = PrimitiveSense.new

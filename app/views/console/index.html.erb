@@ -19,33 +19,56 @@
 
 	  if(e.which == 13) {
 	  	
-	 	//Get the current time
-	 	var d = new Date();
-	 	var time;
-  		time  =     + d.getHours(); // => 9
-		time += ':' + d.getMinutes(); // =>  30
-		if(d.getSeconds() > 9)
-			time += ':' + d.getSeconds()	
-		else
-			time += ':0' + d.getSeconds()
+  	 	//Get the current time
+  	 	var d = new Date();
+  	 	var time;
 
-		//Mount the console text
-		temp = time + ' ->   ' + $('#shellCurrent').val();
-		shellContent = $('#shellPass').val() + temp + '\n';
-	   	input = $('#shellPass').val(shellContent)
 
-	   	//Call the submition function
-	   	submitCommand($('#shellCurrent').val())
 
-	   	//Reset the input console
-	   	$('#shellCurrent').val('')
-	   	$('#shellCurrent').val('THINK ');
+      //Verificação de comandos especiais
+      if ($('#shellCurrent').val() == 'clear')
+      {
+        $('#shellPass').val('');
+        resetShell();
+        return 0;
+      }
 
-	   	//Scroll the console
-	   	document.getElementById("shellPass").scrollTop =    document.getElementById("shellPass").scrollHeight
-		
 
-  	  }
+
+
+    	time  =     + d.getHours(); // => 9
+  		time += ':' + d.getMinutes(); // =>  30
+  		if(d.getSeconds() > 9)
+  			time += ':' + d.getSeconds()	
+  		else
+  			time += ':0' + d.getSeconds()
+
+  		//Mount the console text
+  		temp = time + ' ->   ' + $('#shellCurrent').val();
+  		shellContent = $('#shellPass').val() + temp + '\n';
+  	   	input = $('#shellPass').val(shellContent)
+
+  	   	//Call the submition function
+  	   	submitCommand('console ' + $('#shellCurrent').val())
+
+  	   	resetShell();
+
+  	   	//Scroll the console
+  	   	document.getElementById("shellPass").scrollTop =    document.getElementById("shellPass").scrollHeight
+  		
+
+    	  }
+
+        //Função de exclusão de elemento
+        function resetShell()
+        {
+          //Reset the input console
+          $('#shellCurrent').val('')
+          $('#shellCurrent').val('THINK ');
+
+        }
+
+
 
   	   //Função de exclusão de elemento
         function submitCommand(command)
@@ -59,9 +82,9 @@
                 data: info
 
                 }).done(function(data) {
-                   
-                   console.log("submit command")
-                  
+                   serverResponse = "RESPONSE:  " + data.response + '\n'
+                   shellContent = $('#shellPass').val() + serverResponse;
+                   input = $('#shellPass').val(shellContent);
                 });
 
             
