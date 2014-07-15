@@ -1,24 +1,38 @@
 <div style="margin-top:40px;margin-right:">
-	<p class="span2"></p>	
+	<p class="span2"></p>
 	<textarea  rows='26' id="shellPass"  readonly></textarea>
-	
+
 </div>
 
 <div style="margin-top:px;margin-right:">
-	<p class="span2"></p>	
+	<p class="span2"></p>
 	<input  rows='1' cols='1' id="shellCurrent"></input>
 </div>
 
 
 
-<script type="text/javascript"> 
-	 $('#shellCurrent').val('THINK ');
+<script type="text/javascript">
+	var keyPressUp = 0;
+  $('#shellCurrent').val('THINK ');
 
   $(document).keypress(function(e) {
-	 
+
+    if(e.which == 38) {
+      rescueCommandKey('console THINK keyPressSave ' + keyPressUp + ' up');
+      keyPressUp++;
+    }
+
+    if(e.which == 40) {
+      if keyPressUp > 0
+      {
+        rescueCommandKey('console THINK keyPressSave ' + keyPressUp + ' up');
+        keyPressUp--;
+      }
+    }
+
 
 	  if(e.which == 13) {
-	  	
+
   	 	//Get the current time
   	 	var d = new Date();
   	 	var time;
@@ -34,12 +48,10 @@
       }
 
 
-
-
     	time  =     + d.getHours(); // => 9
   		time += ':' + d.getMinutes(); // =>  30
   		if(d.getSeconds() > 9)
-  			time += ':' + d.getSeconds()	
+  			time += ':' + d.getSeconds()
   		else
   			time += ':0' + d.getSeconds()
 
@@ -55,7 +67,7 @@
 
   	   	//Scroll the console
   	   	document.getElementById("shellPass").scrollTop =    document.getElementById("shellPass").scrollHeight
-  		
+
 
     	  }
 
@@ -70,11 +82,10 @@
 
 
 
-  	   //Função de exclusão de elemento
+  	   //Functio to submit a command
         function submitCommand(command)
         {
 
-          //Apaga no banco
           info = {"command": command };
             $.ajax({
                 type: 'post',
@@ -86,8 +97,36 @@
                    shellContent = $('#shellPass').val() + serverResponse;
                    input = $('#shellPass').val(shellContent);
                 });
+        }
 
-            
+        //Function to submit up arrow or down arrow
+        function submitCommandKey(command)
+        {
+          //Apaga no banco
+          info = {"command": command };
+            $.ajax({
+                type: 'post',
+                url: "../thinkDo",
+                data: info
+
+                }).done(function(data) {
+                   console.log('submited')
+                });
+        }
+
+        //Function to rescue up arrow or down arrow
+        function rescueCommandKey(command)
+        {
+          //Apaga no banco
+          info = {"command": command };
+            $.ajax({
+                type: 'post',
+                url: "../thinkDo",
+                data: info
+
+                }).done(function(data) {
+                   shellContent = $('#shellCurrent').val() + data.response;
+                });
         }
 });
 </script>
