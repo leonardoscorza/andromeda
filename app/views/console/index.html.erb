@@ -18,14 +18,15 @@
   $('#shellCurrent').keydown(function(e) {
 
     if(e.which == 38) {
-      rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp + ' up');
+      rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp);
+      alert(keyPressUp);
       keyPressUp++;
     }
 
     if(e.which == 40) {
       if (keyPressUp > 0)
       {
-        rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp + ' down');
+        rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp);
         keyPressUp--;
       }
     }
@@ -84,7 +85,7 @@
         //Função de exclusão de elemento
         function getCurrentTime()
         {
-        	var time = '';	
+        	var time = '';
 	    	time  =  + d.getHours(); // => 9
 	    	if(d.getMinutes() > 9)
 	  			time += ':' + d.getMinutes(); // =>  30
