@@ -15,17 +15,17 @@
 	var keyPressUp = 0;
   $('#shellCurrent').val('THINK ');
 
-  $(document).keypress(function(e) {
+  $('#shellCurrent').keydown(function(e) {
 
     if(e.which == 38) {
-      rescueCommandKey('console THINK keyPressSave ' + keyPressUp + ' up');
+      rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp + ' up');
       keyPressUp++;
     }
 
     if(e.which == 40) {
-      if keyPressUp > 0
+      if (keyPressUp > 0)
       {
-        rescueCommandKey('console THINK keyPressSave ' + keyPressUp + ' up');
+        rescueCommandKey('console THINK sentenceSave rescueOne ' + keyPressUp + ' down');
         keyPressUp--;
       }
     }
@@ -36,40 +36,41 @@
   	 	//Get the current time
   	 	var d = new Date();
   	 	var time;
+  	 	var shellCurrent;
 
 
 
-      //Verificação de comandos especiais
-      if ($('#shellCurrent').val() == 'clear')
-      {
-        $('#shellPass').val('');
-        resetShell();
-        return 0;
-      }
+	      //Verificação de comandos especiais
+	      if ($('#shellCurrent').val() == 'clear')
+	      {
+	        $('#shellPass').val('');
+	        resetShell();
+	        return 0;
+	      }
+
+	      	time = getCurrentTime();
+
+	  		//Mount the console text
+	  		temp = time + ' ->   ' + $('#shellCurrent').val();
+	  		shellContent = $('#shellPass').val() + temp + '\n';
+	  	   	input = $('#shellPass').val(shellContent)
+
+	  	   	//Call the command armazenat commands function
+	  	   	shellCurrent = $('#shellCurrent').val();
+	  	   	shellCurrent = shellCurrent.split(' ');
+	  	   	shellCurrent.join()
+	  	   	submitCommandKey('console ' + 'THINK sentenceSave saveOne ' + shellCurrent )
+
+	  	   	//Call the submition function
+	  	   	submitCommand('console ' + $('#shellCurrent').val())
+
+	  	   	resetShell();
+
+	  	   	//Scroll the console
+	  	   	document.getElementById("shellPass").scrollTop = document.getElementById("shellPass").scrollHeight
 
 
-    	time  =     + d.getHours(); // => 9
-  		time += ':' + d.getMinutes(); // =>  30
-  		if(d.getSeconds() > 9)
-  			time += ':' + d.getSeconds()
-  		else
-  			time += ':0' + d.getSeconds()
-
-  		//Mount the console text
-  		temp = time + ' ->   ' + $('#shellCurrent').val();
-  		shellContent = $('#shellPass').val() + temp + '\n';
-  	   	input = $('#shellPass').val(shellContent)
-
-  	   	//Call the submition function
-  	   	submitCommand('console ' + $('#shellCurrent').val())
-
-  	   	resetShell();
-
-  	   	//Scroll the console
-  	   	document.getElementById("shellPass").scrollTop =    document.getElementById("shellPass").scrollHeight
-
-
-    	  }
+	   	}
 
         //Função de exclusão de elemento
         function resetShell()
@@ -79,6 +80,23 @@
           $('#shellCurrent').val('THINK ');
 
         }
+
+        //Função de exclusão de elemento
+        function getCurrentTime()
+        {
+        	var time = '';	
+	    	time  =  + d.getHours(); // => 9
+	    	if(d.getMinutes() > 9)
+	  			time += ':' + d.getMinutes(); // =>  30
+	  		else
+	  			time += ':0' + d.getMinutes(); // =>  30
+	  		if(d.getSeconds() > 9)
+	  			time += ':' + d.getSeconds();
+	  		else
+	  			time += ':0' + d.getSeconds();
+	  		return time;
+        }
+
 
 
 
