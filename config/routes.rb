@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
   get 'console' => 'console#index'
-
+  resources :login, only: [:index, :create]
+  post 'logout' => 'login#logout'
+  root :to => 'login#index'
   post 'thinkDo' => 'think#do'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

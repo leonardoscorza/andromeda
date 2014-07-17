@@ -1,6 +1,5 @@
 class ConsoleController < ApplicationController
-
-def index
-end
-
+  before_filter :validate_user
+  def index
+  end
 end

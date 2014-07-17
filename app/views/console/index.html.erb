@@ -9,6 +9,10 @@
 	<div contenteditable="true"  id="shellCurrent" onfocus="this.value = this.value;"></div>
 </div>
 
+<form id="logout" action="logout" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>
+
 
 
 <script type="text/javascript">
@@ -40,12 +44,21 @@
     	 	var shellCurrent;
 
 	      //Verificação de comandos especiais
-	      if ($('#shellCurrent').html() == 'clear')
+
+        //clear
+        if ($('#shellCurrent').html() == 'clear')
 	      {
 	        $('#shellPass').html('');
 	        resetShell();
 	        return 0;
 	      }
+
+        //login
+        if ($('#shellCurrent').html() == 'logout')
+        {
+          logout();
+        }
+        ///////////////////////////////////
 
 	      	time = getCurrentTime();
           time = "<font color='red'>" + time + "</font>"
@@ -71,6 +84,13 @@
 
 
 	   	}
+
+
+        //Função para realizar o logout do usuario
+        function logout()
+        {
+          $( "#logout" ).submit();
+        }
 
         //Função de exclusão de elemento
         function resetShell()
