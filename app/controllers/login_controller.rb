@@ -5,7 +5,6 @@ class LoginController < ApplicationController
     if session[:validation] == 'changethispart'
       redirect_to console_path
     end
-
   end
 
   def create

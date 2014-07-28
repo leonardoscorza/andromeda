@@ -6,9 +6,23 @@ load 'lib/primitive_sense.rb'
 
 	def do
 		$sense.speak('!',params[:command])
-    sleep(0.8)
-    response = $sense.listen()
-    render json: {'response' => response}
+
+    i = 0
+    while i != 40
+      sleep(0.1)
+      response = $sense.listen()
+      if response != nil
+            break
+      end
+      i += 1
+    end
+
+    if response != nil
+      render json: {'response' => response}
+    else
+      render json: {'response' => 'Not response'}
+    end
+
 	end
 
 end

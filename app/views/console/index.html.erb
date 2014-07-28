@@ -1,6 +1,6 @@
 <div style="margin-top:40px;margin-right:">
 	<p class="span2"></p>
-	<div contenteditable="true" rows='26' id="shellPass"  readonly ></div>
+	<div contenteditable="false" rows='26' id="shellPass"  readonly ></div>
 
 </div>
 
@@ -131,7 +131,7 @@ Criar limpeza de fila ao iniciar -->
         function submitCommand(command)
         {
 
-          info = {"command": command };
+          info = {"command": command};
             $.ajax({
                 type: 'post',
                 url: "../thinkDo",
@@ -148,7 +148,7 @@ Criar limpeza de fila ao iniciar -->
         function submitCommandKey(command)
         {
           //Apaga no banco
-          info = {"command": command };
+          info = {"command": command};
             $.ajax({
                 type: 'post',
                 url: "../thinkDo",
