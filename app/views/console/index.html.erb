@@ -19,6 +19,30 @@ Criar limpeza de fila ao iniciar -->
 
 <script type="text/javascript">
 	var keyPressUp = 0;
+
+  
+  var myVar = setInterval(function(){ getNew() }, 1000);
+
+  function getNew()
+  {
+    info = {};
+    $.ajax({
+        type: 'get',
+        url: "../getCommunications",
+        data: info
+
+        }).done(function(data) {
+          response = data.response
+          if(response != false)
+          {
+            serverResponse = "RESPONSE:  " + data.response
+            shellContent = $('#shellPass').val() + serverResponse;
+            $('#shellPass').append("<p>" + shellContent + "</p>");
+          }
+        }); 
+  }
+
+  
   // $('#shellCurrent').append('THINK ');
 
   $('#shellCurrent').keydown(function(e) {
@@ -66,18 +90,18 @@ Criar limpeza de fila ao iniciar -->
           time = "<font color='red'>" + time + "</font>"
 
   	  		//Mount the console text
-  	  		temp = time + ' ->   THINK ' + $('#shellCurrent').html();
+  	  		temp = time + ' ->   THINK ' + $('#shellCurrent').text();
   	  		shellContent = '<p>' + temp + '</p>' ;
   	  	  $('#shellPass').append(shellContent)
 
 	  	   	//Call the command armazenat commands function
-	  	   	shellCurrent = 'THINK ' + $('#shellCurrent').html();
+	  	   	shellCurrent = 'THINK ' + $('#shellCurrent').text();
 	  	   	shellCurrent = shellCurrent.split(' ');
 	  	   	shellCurrent.join()
 	  	   	submitCommandKey('console ' + 'THINK sentenceSave saveOne ' + shellCurrent )
 
 	  	   	//Call the submition function
-	  	   	submitCommand('console THINK ' + $('#shellCurrent').html())
+	  	   	submitCommand('console THINK ' + $('#shellCurrent').text())
 
 	  	   	resetShell();
 
@@ -98,7 +122,7 @@ Criar limpeza de fila ao iniciar -->
         function resetShell()
         {
           //Reset the input console
-          $('#shellCurrent').html('')
+          $('#shellCurrent').text('')
           // $('#shellCurrent').append('THINK ');
 
         }
@@ -127,21 +151,21 @@ Criar limpeza de fila ao iniciar -->
         }
 
 
-  	   //Functio to submit a command
+  	   //Function to submit a command
         function submitCommand(command)
         {
 
           info = {"command": command};
-            $.ajax({
-                type: 'post',
-                url: "../thinkDo",
-                data: info
+          $.ajax({
+              type: 'post',
+              url: "../thinkDo",
+              data: info
 
-                }).done(function(data) {
-                   serverResponse = "RESPONSE:  " + data.response
-                   shellContent = $('#shellPass').val() + serverResponse;
-                   $('#shellPass').append("<p>" + shellContent + "</p>");
-                });
+              }).done(function(data) {
+                 // serverResponse = "RESPONSE:  " + data.response
+                 // shellContent = $('#shellPass').val() + serverResponse;
+                 // $('#shellPass').append("<p>" + shellContent + "</p>");
+              });
         }
 
         //Function to submit up arrow or down arrow
@@ -173,7 +197,7 @@ Criar limpeza de fila ao iniciar -->
                    var temp = data.response;
                    console.log(temp);
 
-                   $('#shellCurrent').html('');
+                   $('#shellCurrent').text('');
                    temp = temp.replace('THINK', '');
                    temp = replaceAll( temp , ',', ' ');
                    $('#shellCurrent').append(temp);

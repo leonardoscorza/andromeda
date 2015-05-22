@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
   protect_from_forgery with: :exception
 
-
-
   def validate_user
     unless session[:validation] == 'changethispart'
       session[:validation] = ''

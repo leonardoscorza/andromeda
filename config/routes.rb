@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'logout' => 'login#logout'
   root :to => 'login#index'
   post 'thinkDo' => 'think#do'
+  get  'getCommunications' => 'think#getcommunications'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
